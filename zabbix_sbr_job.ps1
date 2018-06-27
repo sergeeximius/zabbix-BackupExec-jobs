@@ -98,6 +98,13 @@ Write-Output ($nametask1)
 }}
 
 switch ($ITEM) {
+  "TaskLastTotalDataSize" {
+[string] $name = $ID
+$nametask = (Get-BEJobHistory -Name "$name" -JobType "Backup"| Select -last 1).TotalDataSizebytes
+Write-Output ($nametask)
+}}
+
+switch ($ITEM) {
   "TestEncoding" {
 [string] $name = $ID
 Write-Output ($name) | ConvertTo-Encoding cp866 utf-8

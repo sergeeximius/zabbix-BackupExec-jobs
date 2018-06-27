@@ -411,6 +411,50 @@
                             <logtimefmt/>
                             <application_prototypes/>
                         </item_prototype>
+						<item_prototype>
+                            <name>Объем данных последнего задания : {#SYMANTECBACKUP}</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>sbr[TaskLastTotalDataSize,{#SYMANTECBACKUP}]</key>
+                            <delay>7200</delay>
+                            <history>7</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units>B</units>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+							<multiplier>0</multiplier>
+							<formula>1</formula>
+							<delta>0</delta>
+							<delay_flex/>
+							<data_type>0</data_type>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Symantec Backup Exec</name>
+                                </application>
+                            </applications>
+                            <valuemap/>
+                            <logtimefmt/>
+                            <application_prototypes/>
+                        </item_prototype>
                     </item_prototypes>
 					 <trigger_prototypes>
                         <trigger_prototype>
@@ -518,9 +562,21 @@
                     <value>0</value>
                     <newvalue>Ошибка</newvalue>
                 </mapping>
+				<mapping>
+                    <value>1</value>
+                    <newvalue>С предупреждением</newvalue>
+                </mapping>
                 <mapping>
                     <value>2</value>
                     <newvalue>Успешно</newvalue>
+                </mapping>
+				<mapping>
+                    <value>4</value>
+                    <newvalue>Отменено</newvalue>
+                </mapping>
+				<mapping>
+                    <value>5</value>
+                    <newvalue>Восстановлено</newvalue>
                 </mapping>
             </mappings>
         </value_map>
