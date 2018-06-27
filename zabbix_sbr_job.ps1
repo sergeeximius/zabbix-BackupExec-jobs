@@ -1,5 +1,6 @@
 # Script: zabbix_sbr_job
-# Author: Romainsi
+# Author original code: Romainsi
+# Author russian edition: sergeeximius
 # Description: Query Symantec job information
 # 
 # This script is intended for use with Zabbix > 3.X
@@ -16,6 +17,18 @@ Function Convert-ToUnixDate ($PSdate) {
    (New-TimeSpan -Start $epoch -End $PSdate).TotalSeconds
 }
 
+function ConvertTo-Encoding ([string]$From, [string]$To){  
+    Begin{  
+        $encFrom = [System.Text.Encoding]::GetEncoding($from)  
+        $encTo = [System.Text.Encoding]::GetEncoding($to)  
+    }  
+    Process{  
+        $bytes = $encTo.GetBytes($_)  
+        $bytes = [System.Text.Encoding]::Convert($encFrom, $encTo, $bytes)  
+        $encTo.GetString($bytes)  
+    }  
+} 
+
 Import-Module BEMCLI
 
 $ITEM = [string]$args[0]
@@ -25,8 +38,7 @@ switch ($ITEM) {
   "DiscoverTasks" {
 $apptasks = Get-BEJob -Jobtype Backup -Status Active
 if (!$apptasks) {$apptasks = Get-BEJob -Jobtype Backup -Status Scheduled}
-$apptasksok1 = $apptasks.Name
-$apptasksok = $apptasksok1.replace('â','&acirc;').replace('à','&agrave;').replace('ç','&ccedil;').replace('é','&eacute;').replace('è','&egrave;').replace('ê','&ecirc;')
+$apptasksok = $apptasks.Name | ConvertTo-Encoding cp866 utf-8
 $idx = 1
 write-host "{"
 write-host " `"data`":[`n"
@@ -53,18 +65,16 @@ write-host "}"}}
 switch ($ITEM) {
   "TaskLastResult" {
 [string] $name = $ID
-$name1 = $name.replace('&acirc;','â').replace('&agrave;','à').replace('&ccedil;','ç').replace('&eacute;','é').replace('&egrave;','è').replace('&ecirc;','ê')
-$nametask = Get-BEJobHistory -Name "$name1" -JobType "Backup"| Select -last 1
+$nametask = Get-BEJobHistory -Name "$name" -JobType "Backup"| Select -last 1
 $nametask1 = $nametask.JobStatus
-$nametask2 = "$nametask1".replace('Error','0').replace('Warning','1').replace('Succeeded','2').replace('None','2').replace('idle','3').Replace('Canceled','4')
+$nametask2 = "$nametask1".replace('Error','0').replace('Warning','1').replace('Succeeded','2').replace('None','2').replace('idle','3').Replace('Canceled','4') | ConvertTo-Encoding cp866 utf-8 
 Write-Output ($nametask2)
 }}
 
 switch ($ITEM) {
   "TaskLastRunTime" {
 [string] $name = $ID
-$name1 = $name.replace('&acirc;','â').replace('&agrave;','à').replace('&ccedil;','ç').replace('&eacute;','é').replace('&egrave;','è').replace('&ecirc;','ê')
-$nametask = Get-BEJobHistory -Name "$name1" -JobType "Backup"| Select -last 1
+$nametask = Get-BEJobHistory -Name "$name" -JobType "Backup"| Select -last 1
 $taskResult = $nametask.StartTime
 $date = get-date -date "01/01/1970"
 $taskResult1 = (New-TimeSpan -Start $date -end $taskresult).TotalSeconds
@@ -74,8 +84,7 @@ Write-Output ($taskResult1)
 switch ($ITEM) {
   "TaskEndRunTime" {
 [string] $name = $ID
-$name1 = $name.replace('&acirc;','â').replace('&agrave;','à').replace('&ccedil;','ç').replace('&eacute;','é').replace('&egrave;','è').replace('&ecirc;','ê')
-$nametask = Get-BEJobHistory -Name "$name1" -JobType "Backup"| Select -last 1
+$nametask = Get-BEJobHistory -Name "$name" -JobType "Backup"| Select -last 1
 $taskResult = $nametask.EndTime
 $date = get-date -date "01/01/1970"
 $taskResult1 = (New-TimeSpan -Start $date -end $taskresult).TotalSeconds
@@ -85,8 +94,14 @@ Write-Output ($taskResult1)
 switch ($ITEM) {
   "TaskType" {
 [string] $name = $ID
-$name1 = $name.replace('&acirc;','â').replace('&agrave;','à').replace('&ccedil;','ç').replace('&eacute;','é').replace('&egrave;','è').replace('&ecirc;','ê')
-$nametask = Get-BEJob -Name "$name1"
+$nametask = Get-BEJob -Name "$name"
 $nametask1 = $nametask.Storage.StorageType
 Write-Output ($nametask1)
+}}
+
+switch ($ITEM) {
+  "TestEncoding" {
+[string] $name = $ID
+Write-Output ($name) | ConvertTo-Encoding cp866 utf-8
+Write-Output ($name)
 }}
