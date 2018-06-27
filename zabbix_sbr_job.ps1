@@ -12,10 +12,8 @@
 # Add to Zabbix Agent
 #   UserParameter=sbr[*],powershell -NoProfile -ExecutionPolicy Bypass -File "C:\Program Files\Zabbix Agent\scripts\zabbix_sbr_job.ps1" "$1" "$2"
 
-Function Convert-ToUnixDate ($PSdate) {
-   $epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
-   (New-TimeSpan -Start $epoch -End $PSdate).TotalSeconds
-}
+$epoch = [timezone]::CurrentTimeZone.ToLocalTime([datetime]'1/1/1970')
+$DateTZSeconds = (New-TimeSpan -Start "01/01/1970" -End $epoch).TotalSeconds
 
 function ConvertTo-Encoding ([string]$From, [string]$To){  
     Begin{  
@@ -77,7 +75,7 @@ switch ($ITEM) {
 $nametask = Get-BEJobHistory -Name "$name" -JobType "Backup"| Select -last 1
 $taskResult = $nametask.StartTime
 $date = get-date -date "01/01/1970"
-$taskResult1 = (New-TimeSpan -Start $date -end $taskresult).TotalSeconds
+$taskResult1 = (New-TimeSpan -Start $date -end $taskresult).TotalSeconds - $DateTZSeconds
 Write-Output ($taskResult1)
 }}
 
@@ -87,7 +85,7 @@ switch ($ITEM) {
 $nametask = Get-BEJobHistory -Name "$name" -JobType "Backup"| Select -last 1
 $taskResult = $nametask.EndTime
 $date = get-date -date "01/01/1970"
-$taskResult1 = (New-TimeSpan -Start $date -end $taskresult).TotalSeconds
+$taskResult1 = (New-TimeSpan -Start $date -end $taskresult).TotalSeconds - $DateTZSeconds
 Write-Output ($taskResult1)
 }}
 
