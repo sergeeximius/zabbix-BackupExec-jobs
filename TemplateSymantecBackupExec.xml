@@ -324,7 +324,7 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Время последнего запуска задания : {#SYMANTECBACKUP}</name>
+                            <name>Время запуска последнего задания : {#SYMANTECBACKUP}</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
