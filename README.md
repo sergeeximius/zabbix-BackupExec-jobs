@@ -24,6 +24,7 @@ Optimizing for Symantec Backup Exec on Cyrillic CP866 and Zabbix Server on UTF-8
   - End of each task
   - Result of each task
   - Backup type of each task
+  - Last task total data size
 
 **-------- Discovery Triggers --------**
 
