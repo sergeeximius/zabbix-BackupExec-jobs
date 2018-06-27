@@ -19,7 +19,7 @@
             </groups>
             <applications>
                 <application>
-                    <name>Processus Symantec</name>
+                    <name>Process Symantec</name>
                 </application>
                 <application>
                     <name>Symantec Backup Exec</name>
@@ -63,7 +63,7 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Processus Symantec</name>
+                            <name>Process Symantec</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -106,7 +106,7 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Processus Symantec</name>
+                            <name>Process Symantec</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -149,7 +149,7 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Processus Symantec</name>
+                            <name>Process Symantec</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -192,7 +192,7 @@
                     <inventory_link>0</inventory_link>
                     <applications>
                         <application>
-                            <name>Processus Symantec</name>
+                            <name>Process Symantec</name>
                         </application>
                     </applications>
                     <valuemap/>
@@ -234,7 +234,7 @@
                     <description/>
                     <item_prototypes>
                         <item_prototype>
-                            <name>Fin de la dernière tâche : {#SYMANTECBACKUP}</name>
+                            <name>Время завершения последнего задания : {#SYMANTECBACKUP}</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -278,7 +278,7 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Résultat du backup : {#SYMANTECBACKUP}</name>
+                            <name>Результат резервного копирования : {#SYMANTECBACKUP}</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -324,7 +324,7 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Dernier lancement de la tâche : {#SYMANTECBACKUP}</name>
+                            <name>Время последнего запуска задания : {#SYMANTECBACKUP}</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -368,7 +368,7 @@
                             <application_prototypes/>
                         </item_prototype>
                         <item_prototype>
-                            <name>Type de backup {#SYMANTECBACKUP}</name>
+                            <name>Тип хранилища {#SYMANTECBACKUP}</name>
                             <type>0</type>
                             <snmp_community/>
                             <snmp_oid/>
@@ -415,7 +415,7 @@
 					 <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=4</expression>
-                            <name>Backup Exec job : {#JOBNAME} Annulé</name>
+                            <name>Backup Exec job : {#JOBNAME} было отменено</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
@@ -425,7 +425,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}&lt;1</expression>
-                            <name>Backup Exec job : {#JOBNAME} en Erreur</name>
+                            <name>Backup Exec job : {#JOBNAME} завершилось ошибкой</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
@@ -435,7 +435,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}&gt;1 and {Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}&lt;2</expression>
-                            <name>Backup Exec job {#JOBNAME} en Avertissement</name>
+                            <name>Backup Exec job {#JOBNAME} выполнено с предупреждением</name>
                             <url/>
                             <status>0</status>
                             <priority>2</priority>
@@ -445,7 +445,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].nodata(86400)}=1</expression>
-                            <name>Pas de retour d'informations depuis 24h</name>
+                            <name>Не отвечает в течении 24 часов</name>
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
@@ -471,7 +471,7 @@
     <triggers>
         <trigger>
             <expression>{Template Symantec BackupExec:service_state[BackupExecManagementService].last()}&gt;0</expression>
-            <name>Backup Exec Management Service Arrêté</name>
+            <name>Backup Exec Management Service Stopped</name>
             <url/>
             <status>0</status>
             <priority>4</priority>
@@ -481,7 +481,7 @@
         </trigger>
         <trigger>
             <expression>{Template Symantec BackupExec:service_state[BackupExecAgentBrowser].last()}&gt;0</expression>
-            <name>Service Backup Exec Agent Browser Arrêté</name>
+            <name>Service Backup Exec Agent Browser Stopped</name>
             <url/>
             <status>0</status>
             <priority>4</priority>
@@ -491,7 +491,7 @@
         </trigger>
         <trigger>
             <expression>{Template Symantec BackupExec:service_state[BackupExecDeviceMediaService].last()}&gt;0</expression>
-            <name>Service Backup Exec Device &amp; Media Arrêté</name>
+            <name>Service Backup Exec Device &amp; Media Stopped</name>
             <url/>
             <status>0</status>
             <priority>4</priority>
@@ -501,7 +501,7 @@
         </trigger>
         <trigger>
             <expression>{Template Symantec BackupExec:service_state[BackupExecJobEngine].last()}&gt;0</expression>
-            <name>Service Backup Exec Job Engine Arrêté</name>
+            <name>Service Backup Exec Job Engine Stopped</name>
             <url/>
             <status>0</status>
             <priority>4</priority>
@@ -516,11 +516,11 @@
             <mappings>
                 <mapping>
                     <value>0</value>
-                    <newvalue>Error</newvalue>
+                    <newvalue>Ошибка</newvalue>
                 </mapping>
                 <mapping>
                     <value>2</value>
-                    <newvalue>Succeeded</newvalue>
+                    <newvalue>Успешно</newvalue>
                 </mapping>
             </mappings>
         </value_map>
