@@ -4,7 +4,8 @@ Work with Symantec Backup Exec V2012 minimum (don't work older versions) !
 
 This template use PowerShell Cmdlets to discover backup job Symantec Backup Exec
 
-Default French translation for Template.
+Default Russian translation for Template.
+Optimize for Symantec Backup Exec on Cyrillic CP866 and Zabbix Server on UTF-8.
 
 **-------- Items --------**
 
