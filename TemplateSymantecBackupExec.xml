@@ -458,7 +458,7 @@
                     </item_prototypes>
 					 <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=4</expression>
+                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=3</expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} было отменено</name>
                             <url/>
                             <status>0</status>
@@ -468,7 +468,7 @@
                             <dependencies/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=0</expression>
+                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=2</expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} завершилось ошибкой</name>
                             <url/>
                             <status>0</status>
