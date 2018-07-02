@@ -459,7 +459,7 @@
 					 <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=4</expression>
-                            <name>Backup Exec задание : {#JOBNAME} было отменено</name>
+                            <name>Backup Exec задание : {#SYMANTECBACKUP} было отменено</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
@@ -469,7 +469,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=0</expression>
-                            <name>Backup Exec задание : {#JOBNAME} завершилось ошибкой</name>
+                            <name>Backup Exec задание : {#SYMANTECBACKUP} завершилось ошибкой</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
@@ -479,7 +479,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=1</expression>
-                            <name>Backup Exec задание {#JOBNAME} выполнено с предупреждением</name>
+                            <name>Backup Exec задание {#SYMANTECBACKUP} выполнено с предупреждением</name>
                             <url/>
                             <status>0</status>
                             <priority>2</priority>

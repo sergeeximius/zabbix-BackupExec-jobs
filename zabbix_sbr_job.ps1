@@ -34,8 +34,9 @@ $ID = [string]$args[1]
 
 switch ($ITEM) {
   "DiscoverTasks" {
-$apptasks = Get-BEJob -Jobtype Backup -Status Active
-if (!$apptasks) {$apptasks = Get-BEJob -Jobtype Backup -Status Scheduled}
+#$apptasks = Get-BEJob -Jobtype Backup -Status Active
+$apptasks = Get-BEJob -Jobtype Backup | Where-Object { $_.SubStatus -eq "Ok" }
+#if (!$apptasks) {$apptasks = Get-BEJob -Jobtype Backup -Status Scheduled}
 $apptasksok = $apptasks.Name | ConvertTo-Encoding cp866 utf-8
 $idx = 1
 write-host "{"
