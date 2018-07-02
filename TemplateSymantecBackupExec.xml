@@ -206,7 +206,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>sbr[&quot;DiscoverTasks&quot;]</key>
-                    <delay>240</delay>
+                    <delay>30m</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -239,7 +239,7 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskEndRunTime,{#SYMANTECBACKUP}]</key>
-                            <delay>240</delay>
+                            <delay>1h</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -283,7 +283,7 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskLastResult,{#SYMANTECBACKUP}]</key>
-                            <delay>1200</delay>
+                            <delay>30m</delay>
                             <history>7</history>
                             <trends>365</trends>
                             <status>0</status>
@@ -329,7 +329,7 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskLastRunTime,{#SYMANTECBACKUP}]</key>
-                            <delay>7200</delay>
+                            <delay>1h</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -373,7 +373,7 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskType,{#SYMANTECBACKUP}]</key>
-                            <delay>14400</delay>
+                            <delay>1h</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -417,7 +417,7 @@
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskLastTotalDataSize,{#SYMANTECBACKUP}]</key>
-                            <delay>7200</delay>
+                            <delay>1h</delay>
                             <history>7</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -459,7 +459,7 @@
 					 <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=4</expression>
-                            <name>Backup Exec задание : {#SYMANTECBACKUP} было отменено</name>
+                            <name>Backup Exec задание {#SYMANTECBACKUP} было отменено</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
@@ -469,7 +469,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=0</expression>
-                            <name>Backup Exec задание : {#SYMANTECBACKUP} завершилось ошибкой</name>
+                            <name>Backup Exec задание {#SYMANTECBACKUP} завершилось ошибкой</name>
                             <url/>
                             <status>0</status>
                             <priority>4</priority>
@@ -489,7 +489,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].nodata(86400)}=1</expression>
-                            <name>Не отвечает в течении 24 часов</name>
+                            <name>Backup Exec задание {#SYMANTECBACKUP} не отвечает в течении 24 часов</name>
                             <url/>
                             <status>0</status>
                             <priority>3</priority>
