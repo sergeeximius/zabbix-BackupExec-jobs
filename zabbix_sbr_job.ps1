@@ -66,7 +66,8 @@ switch ($ITEM) {
 [string] $name = $ID
 $nametask = Get-BEJobHistory -Name "$name" -JobType "Backup"| Select -last 1
 $nametask1 = $nametask.JobStatus
-$nametask2 = "$nametask1".replace('Error','0').replace('Warning','1').replace('Succeeded','2').replace('None','2').replace('idle','3').replace('Canceled','4').replace('Recovered','5') | ConvertTo-Encoding cp866 utf-8 
+#$nametask2 = "$nametask1".replace('Error','0').replace('Warning','1').replace('Succeeded','2').replace('None','2').replace('idle','3').replace('Canceled','4').replace('Recovered','5') | ConvertTo-Encoding cp866 utf-8 
+$nametask2 = "$nametask1".replace('SucceededWithExceptions','1').replace('Succeeded','0').replace('Error','2').replace('Canceled','3').replace('Recovered','4').replace('Missed','5').replace('OnHold','6') | ConvertTo-Encoding cp866 utf-8 
 Write-Output ($nametask2)
 }}
 

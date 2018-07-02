@@ -560,7 +560,7 @@
             <mappings>
                 <mapping>
                     <value>0</value>
-                    <newvalue>Ошибка</newvalue>
+                    <newvalue>Успешно</newvalue>
                 </mapping>
 				<mapping>
                     <value>1</value>
@@ -568,15 +568,23 @@
                 </mapping>
                 <mapping>
                     <value>2</value>
-                    <newvalue>Успешно</newvalue>
+                    <newvalue>Ошибка</newvalue>
                 </mapping>
 				<mapping>
-                    <value>4</value>
+                    <value>3</value>
                     <newvalue>Отменено</newvalue>
                 </mapping>
 				<mapping>
-                    <value>5</value>
+                    <value>4</value>
                     <newvalue>Восстановлено</newvalue>
+                </mapping>
+				<mapping>
+                    <value>5</value>
+					<newvalue>Пропущено</newvalue>
+                </mapping>
+				<mapping>
+                    <value>6</value>
+					<newvalue>На удержании</newvalue>
                 </mapping>
             </mappings>
         </value_map>
