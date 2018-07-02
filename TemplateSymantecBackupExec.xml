@@ -479,7 +479,7 @@
                         </trigger_prototype>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=1</expression>
-                            <name>Backup Exec задание {#SYMANTECBACKUP} выполнено с предупреждением</name>
+                            <name>Backup Exec задание {#SYMANTECBACKUP} выполнено с исключениями</name>
                             <url/>
                             <status>0</status>
                             <priority>2</priority>
@@ -564,7 +564,7 @@
                 </mapping>
 				<mapping>
                     <value>1</value>
-                    <newvalue>С предупреждением</newvalue>
+                    <newvalue>С исключениями</newvalue>
                 </mapping>
                 <mapping>
                     <value>2</value>
