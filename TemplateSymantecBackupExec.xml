@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-07-03T05:58:35Z</date>
+    <date>2018-07-03T06:19:28Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -466,7 +466,7 @@
                             <priority>2</priority>
                             <description/>
                             <type>0</type>
-                            <manual_close>0</manual_close>
+                            <manual_close>1</manual_close>
                             <dependencies/>
                             <tags/>
                         </trigger_prototype>
