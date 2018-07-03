@@ -1,8 +1,9 @@
 **================Zabbix-Symantec-Backup-Exec ================**
 
+Template for Zabbix 3.4.
 Work with Symantec Backup Exec V2012 minimum (don't work older versions) !
 
-This template use PowerShell Cmdlets to discover backup job Symantec Backup Exec
+This template use PowerShell Cmdlets to discover backup job Symantec Backup Exec.
 
 Default Russian translation for Template.
 Optimizing for Symantec Backup Exec on Cyrillic CP866 and Zabbix Server on UTF-8.
@@ -25,11 +26,12 @@ Optimizing for Symantec Backup Exec on Cyrillic CP866 and Zabbix Server on UTF-8
   - Result of each task
   - Backup type of each task
   - Last task total data size
+  - Task does not run 7 days
 
 **-------- Discovery Triggers --------**
 
 [HIGH] => Job has FAILED <br>
-[AVERAGE] => Job has completed with warning<br>
+[AVERAGE] => Job has completed with exceptions<br>
 [MEDIUM] => No data recovery for 24 hours<br>
 
 
