@@ -1,6 +1,7 @@
 **================Zabbix-Symantec-Backup-Exec ================**
 
 Template for Zabbix 3.4.
+
 Work with Symantec Backup Exec V2012 minimum (don't work older versions) !
 
 This template use PowerShell Cmdlets to discover backup job Symantec Backup Exec.
