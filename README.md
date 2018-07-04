@@ -28,12 +28,15 @@ Optimizing for Symantec Backup Exec on Cyrillic CP866 and Zabbix Server on UTF-8
   - Backup type of each task
   - Last task total data size
   - Task does not run 7 days
+  - Current status of task (for recovery expression in triggers, if status is active - trigger is OK)
 
 **-------- Discovery Triggers --------**
 
 [HIGH] => Job has FAILED <br>
+[HIGH] => Job has CANCELLED <br>
 [AVERAGE] => Job has completed with exceptions<br>
 [MEDIUM] => No data recovery for 24 hours<br>
+[MEDIUM] => Job does not run 7 days<br>
 
 
 **-------- Setup --------**

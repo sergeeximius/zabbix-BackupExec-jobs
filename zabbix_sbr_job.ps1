@@ -104,6 +104,15 @@ Write-Output ($nametask)
 }}
 
 switch ($ITEM) {
+  "TaskNowStatus" {
+[string] $name = $ID
+$nametask = (Get-BEJob -Name "$name")
+$nametask1 = $nametask.Status
+$nametask2 = "$nametask1".replace('Active','0').replace('Scheduled','1').replace('OnHold','2').replace('Superseded','3') | ConvertTo-Encoding cp866 utf-8 
+Write-Output ($nametask2)
+}}
+
+switch ($ITEM) {
   "TestEncoding" {
 [string] $name = $ID
 Write-Output ($name) | ConvertTo-Encoding cp866 utf-8

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-07-03T06:19:28Z</date>
+    <date>2018-07-04T02:36:49Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -395,6 +395,50 @@
                             <master_item_prototype/>
                         </item_prototype>
                         <item_prototype>
+                            <name>Текущий статус задания : {#SYMANTECBACKUP}</name>
+                            <type>0</type>
+                            <snmp_community/>
+                            <snmp_oid/>
+                            <key>sbr[TaskNowStatus,{#SYMANTECBACKUP}]</key>
+                            <delay>10m</delay>
+                            <history>7d</history>
+                            <trends>0</trends>
+                            <status>0</status>
+                            <value_type>3</value_type>
+                            <allowed_hosts/>
+                            <units/>
+                            <snmpv3_contextname/>
+                            <snmpv3_securityname/>
+                            <snmpv3_securitylevel>0</snmpv3_securitylevel>
+                            <snmpv3_authprotocol>0</snmpv3_authprotocol>
+                            <snmpv3_authpassphrase/>
+                            <snmpv3_privprotocol>0</snmpv3_privprotocol>
+                            <snmpv3_privpassphrase/>
+                            <params/>
+                            <ipmi_sensor/>
+                            <authtype>0</authtype>
+                            <username/>
+                            <password/>
+                            <publickey/>
+                            <privatekey/>
+                            <port/>
+                            <description/>
+                            <inventory_link>0</inventory_link>
+                            <applications>
+                                <application>
+                                    <name>Symantec Backup Exec</name>
+                                </application>
+                            </applications>
+                            <valuemap>
+                                <name>sbrtaskstatus</name>
+                            </valuemap>
+                            <logtimefmt/>
+                            <preprocessing/>
+                            <jmx_endpoint/>
+                            <application_prototypes/>
+                            <master_item_prototype/>
+                        </item_prototype>
+                        <item_prototype>
                             <name>Тип хранилища {#SYMANTECBACKUP}</name>
                             <type>0</type>
                             <snmp_community/>
@@ -440,8 +484,8 @@
                     <trigger_prototypes>
                         <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=3</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} было отменено</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
@@ -455,9 +499,11 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=1</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
+                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=1&#13;
+and&#13;
+{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} &gt; 0</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} выполнено с исключениями</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
@@ -466,14 +512,16 @@
                             <priority>2</priority>
                             <description/>
                             <type>0</type>
-                            <manual_close>1</manual_close>
+                            <manual_close>0</manual_close>
                             <dependencies/>
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=2</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
+                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=2&#13;
+and&#13;
+{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} &gt; 0</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} завершилось ошибкой</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
@@ -487,9 +535,11 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>({Template Symantec BackupExec:sbr[TaskLastRunTime,{#SYMANTECBACKUP}].now()} - {Template Symantec BackupExec:sbr[TaskLastRunTime,{#SYMANTECBACKUP}].last()}) &gt; 7d</expression>
-                            <recovery_mode>0</recovery_mode>
-                            <recovery_expression/>
+                            <expression>({Template Symantec BackupExec:sbr[TaskLastRunTime,{#SYMANTECBACKUP}].now()} - {Template Symantec BackupExec:sbr[TaskLastRunTime,{#SYMANTECBACKUP}].last()}) &gt; 7d&#13;
+and &#13;
+{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} &gt; 0</expression>
+                            <recovery_mode>1</recovery_mode>
+                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} не запускалось более 7 дней</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
@@ -498,7 +548,7 @@
                             <priority>3</priority>
                             <description/>
                             <type>0</type>
-                            <manual_close>1</manual_close>
+                            <manual_close>0</manual_close>
                             <dependencies/>
                             <tags/>
                         </trigger_prototype>
@@ -632,6 +682,27 @@
                 <mapping>
                     <value>6</value>
                     <newvalue>На удержании</newvalue>
+                </mapping>
+            </mappings>
+        </value_map>
+        <value_map>
+            <name>sbrtaskstatus</name>
+            <mappings>
+                <mapping>
+                    <value>0</value>
+                    <newvalue>Активное</newvalue>
+                </mapping>
+                <mapping>
+                    <value>1</value>
+                    <newvalue>Запланировано</newvalue>
+                </mapping>
+                <mapping>
+                    <value>2</value>
+                    <newvalue>На удержании</newvalue>
+                </mapping>
+                <mapping>
+                    <value>3</value>
+                    <newvalue>Заменено</newvalue>
                 </mapping>
             </mappings>
         </value_map>
