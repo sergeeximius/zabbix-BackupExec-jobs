@@ -34,7 +34,6 @@ Optimizing for Symantec Backup Exec on Cyrillic CP866 and Zabbix Server on UTF-8
 
 [HIGH] => Job has FAILED <br>
 [HIGH] => Job has CANCELLED <br>
-[AVERAGE] => Job has completed with exceptions<br>
 [MEDIUM] => No data recovery for 24 hours<br>
 [MEDIUM] => Job does not run 7 days<br>
 
