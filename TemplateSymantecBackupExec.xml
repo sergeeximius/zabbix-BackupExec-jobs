@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <zabbix_export>
     <version>3.4</version>
-    <date>2018-07-04T02:36:49Z</date>
+    <date>2018-07-09T19:06:53Z</date>
     <groups>
         <group>
             <name>Templates</name>
@@ -28,7 +28,7 @@
             <items>
                 <item>
                     <name>Service Backup Exec Agent Browser</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>service_state[BackupExecAgentBrowser]</key>
@@ -69,7 +69,7 @@
                 </item>
                 <item>
                     <name>Service Backup Exec Device &amp; Media</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>service_state[BackupExecDeviceMediaService]</key>
@@ -110,7 +110,7 @@
                 </item>
                 <item>
                     <name>Service Backup Exec Job Engine</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>service_state[BackupExecJobEngine]</key>
@@ -151,7 +151,7 @@
                 </item>
                 <item>
                     <name>Backup Exec Management Service</name>
-                    <type>0</type>
+                    <type>7</type>
                     <snmp_community/>
                     <snmp_oid/>
                     <key>service_state[BackupExecManagementService]</key>
@@ -198,7 +198,7 @@
                     <snmp_community/>
                     <snmp_oid/>
                     <key>sbr[&quot;DiscoverTasks&quot;]</key>
-                    <delay>30m</delay>
+                    <delay>15m</delay>
                     <status>0</status>
                     <allowed_hosts/>
                     <snmpv3_contextname/>
@@ -226,11 +226,11 @@
                     <item_prototypes>
                         <item_prototype>
                             <name>Время завершения последнего задания : {#SYMANTECBACKUP}</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskEndRunTime,{#SYMANTECBACKUP}]</key>
-                            <delay>1h</delay>
+                            <delay>15m</delay>
                             <history>7d</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -268,11 +268,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Результат резервного копирования : {#SYMANTECBACKUP}</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskLastResult,{#SYMANTECBACKUP}]</key>
-                            <delay>30m</delay>
+                            <delay>15m</delay>
                             <history>7d</history>
                             <trends>365d</trends>
                             <status>0</status>
@@ -312,11 +312,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Время запуска последнего задания : {#SYMANTECBACKUP}</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskLastRunTime,{#SYMANTECBACKUP}]</key>
-                            <delay>1h</delay>
+                            <delay>15m</delay>
                             <history>7d</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -354,11 +354,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Объем данных последнего задания : {#SYMANTECBACKUP}</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskLastTotalDataSize,{#SYMANTECBACKUP}]</key>
-                            <delay>1h</delay>
+                            <delay>15m</delay>
                             <history>7d</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -396,7 +396,7 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Текущий статус задания : {#SYMANTECBACKUP}</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskNowStatus,{#SYMANTECBACKUP}]</key>
@@ -440,11 +440,11 @@
                         </item_prototype>
                         <item_prototype>
                             <name>Тип хранилища {#SYMANTECBACKUP}</name>
-                            <type>0</type>
+                            <type>7</type>
                             <snmp_community/>
                             <snmp_oid/>
                             <key>sbr[TaskType,{#SYMANTECBACKUP}]</key>
-                            <delay>1h</delay>
+                            <delay>15m</delay>
                             <history>7d</history>
                             <trends>0</trends>
                             <status>0</status>
@@ -483,9 +483,13 @@
                     </item_prototypes>
                     <trigger_prototypes>
                         <trigger_prototype>
-                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=3</expression>
+                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=3&#13;
+and &#13;
+{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} &gt; 0</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
+                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0&#13;
+or&#13;
+{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}&lt;&gt;3</recovery_expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} было отменено</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
@@ -499,29 +503,13 @@
                             <tags/>
                         </trigger_prototype>
                         <trigger_prototype>
-                            <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=1&#13;
-and&#13;
-{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} &gt; 0</expression>
-                            <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
-                            <name>Backup Exec задание {#SYMANTECBACKUP} выполнено с исключениями</name>
-                            <correlation_mode>0</correlation_mode>
-                            <correlation_tag/>
-                            <url/>
-                            <status>0</status>
-                            <priority>2</priority>
-                            <description/>
-                            <type>0</type>
-                            <manual_close>0</manual_close>
-                            <dependencies/>
-                            <tags/>
-                        </trigger_prototype>
-                        <trigger_prototype>
                             <expression>{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}=2&#13;
 and&#13;
 {Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} &gt; 0</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
+                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0&#13;
+or&#13;
+{Template Symantec BackupExec:sbr[TaskLastResult,{#SYMANTECBACKUP}].last()}&lt;&gt;2</recovery_expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} завершилось ошибкой</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
@@ -539,7 +527,9 @@ and&#13;
 and &#13;
 {Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} &gt; 0</expression>
                             <recovery_mode>1</recovery_mode>
-                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0</recovery_expression>
+                            <recovery_expression>{Template Symantec BackupExec:sbr[TaskNowStatus,{#SYMANTECBACKUP}].last()} = 0&#13;
+or&#13;
+({Template Symantec BackupExec:sbr[TaskLastRunTime,{#SYMANTECBACKUP}].now()} - {Template Symantec BackupExec:sbr[TaskLastRunTime,{#SYMANTECBACKUP}].last()}) &lt; 7d</recovery_expression>
                             <name>Backup Exec задание {#SYMANTECBACKUP} не запускалось более 7 дней</name>
                             <correlation_mode>0</correlation_mode>
                             <correlation_tag/>
